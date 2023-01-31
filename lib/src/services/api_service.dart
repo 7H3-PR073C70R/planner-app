@@ -9,24 +9,24 @@ import 'package:planner_app/src/core/error/exceptions.dart';
 
 abstract class ApiService {
   //? For making get request to the endpoint
-  Future<dynamic> get({
+  Future<Map<String, dynamic>> get({
     required Uri url,
     required Map<String, dynamic> queryParameters,
     Map<String, dynamic>? headers,
   });
 
   //? For making post request to the endpoint
-  Future<dynamic> post({
+  Future<Map<String, dynamic>> post({
     required Uri url,
     required dynamic body,
-    Map<String, String> headers,
+    Map<String, dynamic>? headers,
   });
 
   //? For making patch request to the endpoint
-  Future<dynamic> patch({
+  Future<Map<String, dynamic>> patch({
     required Uri url,
     required Map<String, dynamic> body,
-    Map<String, String> headers,
+    Map<String, dynamic>? headers,
   });
 }
 
@@ -57,7 +57,7 @@ class ApiServiceImpl implements ApiService {
   final Dio _dio;
 
   @override
-  Future<dynamic> get({
+  Future<Map<String, dynamic>> get({
     required Uri url,
     required Map<String, dynamic> queryParameters,
     Map<String, dynamic>? headers,
@@ -73,7 +73,7 @@ class ApiServiceImpl implements ApiService {
         options: Options(headers: headers, contentType: 'application/json'),
       );
       _log.i('Response from $url \n${response.data}');
-      return response.data;
+      return response.data!;
     } on DioError catch (error, trace) {
       _log.e('Error from $url', error.message);
       throw ServerException(
@@ -84,10 +84,10 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  Future<dynamic> post({
+  Future<Map<String, dynamic>> post({
     required Uri url,
     required dynamic body,
-    Map<String, String>? headers,
+    Map<String, dynamic>? headers,
   }) async {
     final jsonBody = jsonEncode(body);
     _log
@@ -105,7 +105,7 @@ class ApiServiceImpl implements ApiService {
         ),
       );
       _log.i('Response from $url \n${response.data}');
-      return response.data;
+      return response.data!;
     } on DioError catch (error, trace) {
       _log.e('Error from $url', error.message);
       throw ServerException(
@@ -116,10 +116,10 @@ class ApiServiceImpl implements ApiService {
   }
 
   @override
-  Future<dynamic> patch({
+  Future<Map<String, dynamic>> patch({
     required Uri url,
     required Map<String, dynamic> body,
-    Map<String, String>? headers,
+    Map<String, dynamic>? headers,
   }) async {
     _log.i('Making Patch Request to $url with the following data \n$body');
     try {
@@ -132,7 +132,7 @@ class ApiServiceImpl implements ApiService {
       );
 
       _log.i('Response from $url \n${response.data}');
-      return response.data;
+      return response.data!;
     } on DioError catch (error, trace) {
       _log.e('Error from $url', error.toString());
       throw ServerException(

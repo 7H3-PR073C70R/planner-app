@@ -3,7 +3,7 @@
 ///
 /// Example
 ///
-/// static const appName = 'Oxygen'
+/// static const appName = 'Planner'
 ///
 class AppStrings {
   const AppStrings._();
