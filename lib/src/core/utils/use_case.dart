@@ -7,7 +7,7 @@ import 'package:planner_app/src/core/error/failure.dart';
 ///
 ///
 mixin UseCase<Type, Param> {
-  Future<Either<Failure, Type>> call(Param params);
+  Future<Either<Failure, Type>> call(Param param);
 }
 
 ///
