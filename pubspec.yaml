@@ -1,0 +1,45 @@
+name: planner_app
+description: Applaudo Test Task
+
+publish_to: 'none' 
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.0 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+
+  cupertino_icons: ^1.0.2
+  flutter_bloc: ^8.1.1
+  dio: ^4.0.6
+  json_annotation: ^4.7.0
+  freezed_annotation: ^2.1.0
+  dartz: ^0.10.1
+  flutter_svg: ^1.1.0
+  intl: ^0.17.0
+  equatable: ^2.0.3
+  flutter_hooks: ^0.18.5+1
+  logger: ^1.1.0
+  get_it: ^7.2.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  bloc_test: ^9.1.0
+  mocktail: ^0.3.0
+  very_good_analysis: ^3.0.1
+  build_runner:
+  freezed: ^2.1.1
+  json_serializable: ^6.4.1
+
+# The following section is specific to Flutter packages.
+flutter:
+  uses-material-design: true
+  generate: true
+
+  
