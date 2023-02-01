@@ -82,7 +82,7 @@ class TaskPlannerBloc extends Bloc<TaskPlannerEvent, TaskPlannerState> {
           element.name.toLowerCase() == event.categoryEntity.name.toLowerCase(),
       orElse: () => const CategoryEntity(color: '', name: ''),
     );
-    if (category.id != null) {
+    if (category.id == null) {
       emit(
         state.copyWith(
           viewState: ViewState.processing,
