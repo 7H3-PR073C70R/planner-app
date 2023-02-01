@@ -77,29 +77,38 @@ class TaskPlannerBloc extends Bloc<TaskPlannerEvent, TaskPlannerState> {
     SaveCategoryEvent event,
     Emitter<TaskPlannerState> emit,
   ) async {
-    emit(
-      state.copyWith(
-        viewState: ViewState.processing,
-      ),
+    final category = state.categories.firstWhere(
+      (element) =>
+          element.name.toLowerCase() == event.categoryEntity.name.toLowerCase(),
+      orElse: () => const CategoryEntity(color: '', name: ''),
     );
-    final categoryResult = await saveCategoryUseCase(event.categoryEntity);
-    categoryResult.fold(
-      (error) => emit(
+    if (category.id != null) {
+      emit(
         state.copyWith(
-          viewState: ViewState.error,
-          errorMessage: error.message,
+          viewState: ViewState.processing,
         ),
-      ),
-      (category) => emit(
-        state.copyWith(
-          categories: [
-            ...state.categories,
-            category,
-          ],
-          viewState: ViewState.success,
+      );
+      final categoryResult = await saveCategoryUseCase(event.categoryEntity);
+      categoryResult.fold(
+        (error) => emit(
+          state.copyWith(
+            viewState: ViewState.error,
+            errorMessage: error.message,
+          ),
         ),
-      ),
-    );
+        (category) => emit(
+          state.copyWith(
+            categories: [
+              ...state.categories,
+              category,
+            ],
+            viewState: ViewState.success,
+          ),
+        ),
+      );
+    } else {
+       emit(state.copyWith(viewState: ViewState.success));
+    }
     emit(state.copyWith(viewState: ViewState.idle));
   }
 
@@ -137,16 +146,18 @@ class TaskPlannerBloc extends Bloc<TaskPlannerEvent, TaskPlannerState> {
     UpdateTaskEvent event,
     Emitter<TaskPlannerState> emit,
   ) async {
-    final tasks = state.tasks;
+    final task = state.tasks.firstWhere(
+      (element) => element.id == event.taskEntity.id,
+    );
+    final tasks = [...state.tasks];
     emit(
       state.copyWith(
         viewState: ViewState.processing,
       ),
     );
     final taskResult = await updateTaskUseCase(event.taskEntity);
-    tasks[tasks.indexWhere(
-      (element) => element.id == event.taskEntity.id,
-    )] = event.taskEntity;
+    final index = state.tasks.indexOf(task);
+    tasks[index] = event.taskEntity;
     taskResult.fold(
       (error) => emit(
         state.copyWith(

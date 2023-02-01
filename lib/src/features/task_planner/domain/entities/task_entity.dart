@@ -25,6 +25,8 @@ class TaskEntity extends Equatable {
         categoryId: categoryId ?? this.categoryId,
         date: date ?? this.date,
         name: name ?? this.name,
+        id: id,
+        isCompleted: isCompleted ?? this.isCompleted,
       );
 
   @override

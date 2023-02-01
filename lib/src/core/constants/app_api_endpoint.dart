@@ -13,16 +13,16 @@ class AppApiEndpoint {
   static const int sendTimeout = 50000;
 
   static const _extension =
-      'v1/projects/applaudo-todo-app/databases/(default)/documents/';
+      'v1/projects/applaudo-todo-app/databases/(default)/documents';
 
   static const apiKey = 'AIzaSyAFZ2uyHiPuQQi_4wf8cUQpdMEMqGapq_Q';
 
   static Uri baseUri = Uri(scheme: scheme, host: host, path: _extension);
 
   static Uri categories =
-      baseUri.replace(path: '$_extension/categories?key=$apiKey');
+      baseUri.replace(path: '$_extension/categories');
 
-  static Uri task = baseUri.replace(path: '$_extension/tasks?key=$apiKey');
+  static Uri task = baseUri.replace(path: '$_extension/tasks');
 
   static Uri updateTask(String id) => baseUri.replace(
     path: '$_extension/tasks/id?key=$apiKey',
