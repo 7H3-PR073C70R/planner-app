@@ -37,6 +37,7 @@ void main() {
               headers: userService.header,
               queryParameters: {
                 'orderBy': 'name',
+                'key': AppApiEndpoint.apiKey
               },
             ),
           ).thenAnswer((invocation) async => categoriesJson);
@@ -49,6 +50,7 @@ void main() {
               headers: userService.header,
               queryParameters: {
                 'orderBy': 'name',
+                'key': AppApiEndpoint.apiKey
               },
             ),
           );
@@ -68,7 +70,7 @@ void main() {
               headers: userService.header,
               queryParameters: {
                 'orderBy': 'name',
-                'date': 'date',
+                'key': AppApiEndpoint.apiKey
               },
             ),
           ).thenAnswer((invocation) async => tasksJson);
@@ -81,7 +83,7 @@ void main() {
               headers: userService.header,
               queryParameters: {
                 'orderBy': 'name',
-                'date': 'date',
+                'key': AppApiEndpoint.apiKey
               },
             ),
           );
@@ -97,6 +99,9 @@ void main() {
           //! Arrange
           when(
             () => apiService.post(
+              queryParameters: {
+                'key': AppApiEndpoint.apiKey
+              },
               url: AppApiEndpoint.categories,
               headers: userService.header,
               body: category.toJson(),
@@ -107,6 +112,9 @@ void main() {
           //! Assert
           verify(
             () => apiService.post(
+               queryParameters: {
+                'key': AppApiEndpoint.apiKey
+               },
               url: AppApiEndpoint.categories,
               headers: userService.header,
               body: category.toJson(),
@@ -124,6 +132,9 @@ void main() {
           //! Arrange
           when(
             () => apiService.post(
+               queryParameters: {
+                'key': AppApiEndpoint.apiKey
+               },
               url: AppApiEndpoint.task,
               headers: userService.header,
               body: task.toJson(),
@@ -134,6 +145,9 @@ void main() {
           //! Assert
           verify(
             () => apiService.post(
+               queryParameters: {
+                'key': AppApiEndpoint.apiKey
+               },
               url: AppApiEndpoint.task,
               headers: userService.header,
               body: task.toJson(),
@@ -151,6 +165,9 @@ void main() {
           //! Arrange
           when(
             () => apiService.patch(
+               queryParameters: {
+                'key': AppApiEndpoint.apiKey
+               },
               url: AppApiEndpoint.updateTask(task.id!),
               headers: userService.header,
               body: task.toJson(),
@@ -162,6 +179,9 @@ void main() {
           verify(
             () => apiService.patch(
               url:  AppApiEndpoint.updateTask(task.id!),
+              queryParameters: {
+                'key': AppApiEndpoint.apiKey
+              },
               headers: userService.header,
               body: task.toJson(),
             ),

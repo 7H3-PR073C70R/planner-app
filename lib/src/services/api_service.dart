@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:planner_app/src/core/constants/app_api_endpoint.dart';
 import 'package:planner_app/src/core/error/exceptions.dart';
+import 'package:planner_app/src/core/utils/error_message_handler.dart';
 
 abstract class ApiService {
   //? For making get request to the endpoint
@@ -19,6 +20,7 @@ abstract class ApiService {
   Future<Map<String, dynamic>> post({
     required Uri url,
     required dynamic body,
+     required Map<String, dynamic> queryParameters,
     Map<String, dynamic>? headers,
   });
 
@@ -26,6 +28,7 @@ abstract class ApiService {
   Future<Map<String, dynamic>> patch({
     required Uri url,
     required Map<String, dynamic> body,
+     required Map<String, dynamic> queryParameters,
     Map<String, dynamic>? headers,
   });
 }
@@ -75,10 +78,10 @@ class ApiServiceImpl implements ApiService {
       _log.i('Response from $url \n${response.data}');
       return response.data!;
     } on DioError catch (error, trace) {
-      _log.e('Error from $url', error.message);
+      _log.e('Error from $url', error.response?.data);
       throw ServerException(
         trace: trace,
-        message: error.message,
+        message: error.errorMessage,
       );
     }
   }
@@ -87,6 +90,7 @@ class ApiServiceImpl implements ApiService {
   Future<Map<String, dynamic>> post({
     required Uri url,
     required dynamic body,
+     required Map<String, dynamic> queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     final jsonBody = jsonEncode(body);
@@ -100,6 +104,7 @@ class ApiServiceImpl implements ApiService {
       final response = await _dio.post<Map<String, dynamic>>(
         url.toString(),
         data: body,
+        queryParameters: queryParameters,
         options: Options(
           headers: headers,
         ),
@@ -110,7 +115,7 @@ class ApiServiceImpl implements ApiService {
       _log.e('Error from $url', error.message);
       throw ServerException(
         trace: trace,
-        message: error.message,
+        message: error.errorMessage,
       );
     }
   }
@@ -119,6 +124,7 @@ class ApiServiceImpl implements ApiService {
   Future<Map<String, dynamic>> patch({
     required Uri url,
     required Map<String, dynamic> body,
+     required Map<String, dynamic> queryParameters,
     Map<String, dynamic>? headers,
   }) async {
     _log.i('Making Patch Request to $url with the following data \n$body');
@@ -126,6 +132,7 @@ class ApiServiceImpl implements ApiService {
       final response = await _dio.patch<Map<String, dynamic>>(
         url.toString(),
         data: body,
+        queryParameters: queryParameters,
         options: Options(
           headers: headers,
         ),
@@ -137,7 +144,7 @@ class ApiServiceImpl implements ApiService {
       _log.e('Error from $url', error.toString());
       throw ServerException(
         trace: trace,
-        message: error.message,
+        message: error.errorMessage,
       );
     }
   }

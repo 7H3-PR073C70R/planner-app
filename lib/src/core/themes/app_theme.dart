@@ -7,8 +7,8 @@ class AppTheme {
 
   static ThemeData get lightTheme => ThemeData(
         brightness: Brightness.light,
-        fontFamily: 'Roboto',
-        scaffoldBackgroundColor: const Color(0xFFF5F5F5).withAlpha(253),
+        fontFamily: 'Inter',
+        scaffoldBackgroundColor: const Color(0xFFF8F8F8),
         textTheme: const TextTheme(
           bodySmall:  TextStyle(color: Colors.white),
           bodyLarge:  TextStyle(
@@ -23,7 +23,7 @@ class AppTheme {
           displayLarge:  TextStyle(
             color: AppColors.black,
             fontSize: 32,
-            fontWeight: FontWeight.w500,
+            fontWeight: FontWeight.w700,
           ),
           displayMedium: TextStyle(
             color: AppColors.black,

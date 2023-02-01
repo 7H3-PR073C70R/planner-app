@@ -28,6 +28,7 @@ class TaskPlannerRemoteDataSourceImpl implements TaskPlannerRemoteDataSource {
       url: AppApiEndpoint.categories,
       headers: _userService.header,
       queryParameters: {
+        'key': AppApiEndpoint.apiKey,
         'orderBy': 'name',
       },
     );
@@ -43,12 +44,12 @@ class TaskPlannerRemoteDataSourceImpl implements TaskPlannerRemoteDataSource {
       url: AppApiEndpoint.task,
       headers: _userService.header,
       queryParameters: {
+        'key': AppApiEndpoint.apiKey,
         'orderBy': 'name',
-        'date': date,
       },
     );
 
-    final resultList = result['documents'] as List<Map<String, dynamic>>;
+    final resultList = result['documents'] as List;
     return List<Map<String, dynamic>>.from(resultList)
         .map(TaskModel.fromJson)
         .toList();
@@ -59,6 +60,9 @@ class TaskPlannerRemoteDataSourceImpl implements TaskPlannerRemoteDataSource {
     final result = await _apiService.post(
       url: AppApiEndpoint.categories,
       headers: _userService.header,
+      queryParameters: {
+        'key': AppApiEndpoint.apiKey,
+      },
       body: CategoryModel.fromEntity(entity).toJson(),
     );
     return CategoryModel.fromJson(result);
@@ -69,6 +73,9 @@ class TaskPlannerRemoteDataSourceImpl implements TaskPlannerRemoteDataSource {
     final result = await _apiService.post(
       url: AppApiEndpoint.task,
       headers: _userService.header,
+      queryParameters: {
+        'key': AppApiEndpoint.apiKey,
+      },
       body: TaskModel.fromEntity(entity).toJson(),
     );
     return TaskModel.fromJson(result);
@@ -78,6 +85,9 @@ class TaskPlannerRemoteDataSourceImpl implements TaskPlannerRemoteDataSource {
   Future<TaskEntity> updateTask(TaskEntity entity) async {
     final result = await _apiService.patch(
       headers: _userService.header,
+      queryParameters: {
+        'key': AppApiEndpoint.apiKey,
+      },
       url: AppApiEndpoint.updateTask(entity.id!),
       body: TaskModel.fromEntity(entity).toJson(),
     );

@@ -1,36 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:wimueve_mobile/src/core/extensions/extensions.dart';
 
 class AppSpacing {
   const AppSpacing._();
 
   static double screenHeight(BuildContext context) =>
-      MediaQuery.of(context).size;
+      MediaQuery.of(context).size.height;
 
   static double screenWidth(BuildContext context) =>
-      MediaQuery.of(context).size;
+      MediaQuery.of(context).size.width;
 
   // Vertical Spacing
-  static const verticalSpaceTiny = SizedBox(height: 4);
-  static const verticalSpaceSmall = SizedBox(height: 8);
-  static const verticalSpaceMedium = SizedBox(height: 16);
-  static const verticalSpaceLarge = SizedBox(height: 24);
-  static const verticalSpaceHuge = SizedBox(height: 32);
-  static const verticalSpaceMassive = SizedBox(height: 40);
-  static const setVerticalSpace(num h) => SizedBox(height: h);
+  static const SizedBox verticalSpaceTiny = SizedBox(height: 4);
+  static const SizedBox verticalSpaceSmall = SizedBox(height: 8);
+  static const SizedBox verticalSpaceMedium = SizedBox(height: 16);
+  static const SizedBox verticalSpaceLarge = SizedBox(height: 24);
+  static const SizedBox verticalSpaceHuge = SizedBox(height: 32);
+  static const SizedBox verticalSpaceMassive = SizedBox(height: 40);
+  static SizedBox setVerticalSpace(double h) => SizedBox(height: h);
 
   // Vertical Heights.
   static double verticalValueTiny = 4;
   static double verticalValueSmall = 8;
 
   // Horizontal Spacing.
-  static const horizontalSpaceTiny = SizedBox(width: 4);
-  static const horizontalSpaceSmall = SizedBox(width: 8);
-  static const horizontalSpaceMedium = SizedBox(width: 16);
-  static const horizontalSpaceLarge = SizedBox(width: 24);
-  static const horizontalSpaceHuge = SizedBox(width: 32);
-  static const horizontalSpaceMassive = SizedBox(width: 40);
-  static const setHorizontalSpace(num w) => SizedBox(width: w);
+  static const SizedBox horizontalSpaceTiny = SizedBox(width: 4);
+  static const SizedBox horizontalSpaceSmall = SizedBox(width: 8);
+  static const SizedBox horizontalSpaceMedium = SizedBox(width: 16);
+  static const SizedBox horizontalSpaceLarge = SizedBox(width: 24);
+  static const SizedBox horizontalSpaceHuge = SizedBox(width: 32);
+  static const SizedBox horizontalSpaceMassive = SizedBox(width: 40);
+  static SizedBox setHorizontalSpace(double w) => SizedBox(width: w);
 
   static double horizontalSpacing = 25;
 }
