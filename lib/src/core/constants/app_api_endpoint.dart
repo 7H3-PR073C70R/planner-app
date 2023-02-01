@@ -15,7 +15,7 @@ class AppApiEndpoint {
   static const _extension =
       'v1/projects/applaudo-todo-app/databases/(default)/documents';
 
-  static const apiKey = 'AIzaSyAFZ2uyHiPuQQi_4wf8cUQpdMEMqGapq_Q';
+  static const apiKey = '<key>';
 
   static Uri baseUri = Uri(scheme: scheme, host: host, path: _extension);
 
