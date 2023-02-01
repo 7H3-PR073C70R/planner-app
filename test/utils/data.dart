@@ -1,5 +1,8 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:planner_app/src/features/task_planner/data/model/category_model.dart';
 import 'package:planner_app/src/features/task_planner/data/model/task_model.dart';
+import 'package:planner_app/src/features/task_planner/presentation/bloc/task_planner_bloc.dart';
 
 final taskJson = {
   'name': 'projects/applaudo-todo-app/databases/(default)/documents/tasks/'
